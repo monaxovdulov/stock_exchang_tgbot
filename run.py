@@ -5,7 +5,7 @@ import sys
 import logging
 import requests
 from poller import run_loop
-from storage import ensure_data_dir
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -19,7 +19,7 @@ def main() -> None:
         sys.exit(1)
 
     base_url = f"https://api.telegram.org/bot{token}"
-    ensure_data_dir()
+    
 
     # Один Session на всё приложение — быстрее и проще
     with requests.Session() as session:
