@@ -29,4 +29,6 @@ def send_message(
     chat_id: int,
     text: str,
 ) -> None:
-    pass
+    payload={"chat_id": chat_id, "text": text}
+    response=session.post(base + '/sendMessage', json=payload)
+    response.raise_for_status()
