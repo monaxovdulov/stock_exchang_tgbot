@@ -5,10 +5,12 @@ import requests
 import handlers
 
 def handle(update: dict[str, Any], session: requests.Session, base: str, state: dict) -> None:
+    
     """
     Разбирает JSON-представление update.
     Вызывает нужный обработчик для этого update.
     """
+
     if 'message' in update:
         msg = update["message"]
         text = msg.get("text").strip()
