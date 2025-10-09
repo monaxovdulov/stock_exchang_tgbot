@@ -9,4 +9,18 @@ def handle(update: dict[str, Any], session: requests.Session, base: str, state: 
     Разбирает JSON-представление update.
     Вызывает нужный обработчик для этого update.
     """
-    
+    if 'message' in update:
+        msg = update["message"]
+        text = msg.get("text").strip()
+        if text=='/ping':
+            ctx={   'session':session,
+                    'base':base,
+                    'state':state,
+                    'chat_id':msg["chat"]["id"],
+                    'user_id':msg["from"]["id"],
+                    'username':msg["from"].get("username"),
+                    'message_id':msg["message_id"],
+                    'args':text.split()    }
+            handlers.on_ping(ctx)
+    else:
+        return None
