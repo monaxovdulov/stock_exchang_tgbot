@@ -19,9 +19,8 @@ def run_loop(session: requests.Session, base_url: str) -> None:
     - после успешной обработки: сохраняем state, затем offset = update_id + 1;
     - повторяем.
     """
+    offset = None
     while True:
-        try:
-            offset = None
             updates = get_updates(session, base_url, offset, timeout_s=30)
             if updates==[]:
                 continue
@@ -30,5 +29,7 @@ def run_loop(session: requests.Session, base_url: str) -> None:
                     uid = update["update_id"]
                     handle(update, session, base_url, state={})
                     offset = uid + 1
-        except requests.RequestException:
-            logging.info("updates=%d offset=%s", len(updates), offset)
+       # except requests.RequestException:
+       #     logging.info("updates=%d offset=%s", len(updates), offset)
+       # except UnboundLocalError:
+       #     continue

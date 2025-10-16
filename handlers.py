@@ -12,3 +12,6 @@ def _ctx(ctx: dict[str, Any]) -> tuple[requests.Session, str, int, dict]:
 def on_ping(ctx: dict[str, Any]) -> None:
     session, base, chat_id, _ = _ctx(ctx)
     send_message(session, base, chat_id, "pong")
+def on_help(ctx: dict[str, Any]) -> None:
+    session, base, chat_id, _ = _ctx(ctx)
+    send_message(session, base, chat_id, "Write to @kalizeev, and describe your problem")

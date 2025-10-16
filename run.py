@@ -5,6 +5,7 @@ import sys
 import logging
 import requests
 from poller import run_loop
+import dotenv
 
 
 logging.basicConfig(
@@ -13,10 +14,9 @@ logging.basicConfig(
 )
 
 def main() -> None:
-    token = os.environ.get("BOT_TOKEN")
-    if not token:
-        logging.error("Переменная окружения BOT_TOKEN не установлена.")
-        sys.exit(1)
+    dotenv.load_dotenv()
+    token = os.getenv("BOT_TOKEN")
+
 
     base_url = f"https://api.telegram.org/bot{token}"
     
