@@ -9,9 +9,14 @@ def _ctx(ctx: dict[str, Any]) -> tuple[requests.Session, str, int, dict]:
     """Удобная распаковка часто используемых полей контекста."""
     return ctx["session"], ctx["base"], ctx["chat_id"], ctx["state"]
 
+
 def on_ping(ctx: dict[str, Any]) -> None:
     session, base, chat_id, _ = _ctx(ctx)
     send_message(session, base, chat_id, "pong")
+
+
 def on_help(ctx: dict[str, Any]) -> None:
     session, base, chat_id, _ = _ctx(ctx)
-    send_message(session, base, chat_id, "Write to @kalizeev, and describe your problem")
+    send_message(
+        session, base, chat_id, "Write to @kalizeev, and describe your problem"
+    )
