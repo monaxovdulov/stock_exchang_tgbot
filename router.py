@@ -28,6 +28,8 @@ def handle(
                 "args": text.split(),
             }
             handlers.on_ping(ctx)
+        
+
         elif text == "/help":
             ctx = {
                 "session": session,
@@ -40,5 +42,34 @@ def handle(
                 "args": text.split(),
             }
             handlers.on_help(ctx)
+        elif text == "/ai":
+            ctx = {
+                "session": session,
+                "base": base,
+                "state": state,
+                "chat_id": msg["chat"]["id"],
+                "user_id": msg["from"]["id"],
+                "username": msg["from"].get("username"),
+                "message_id": msg["message_id"],
+                "args": text.split(),
+            }
+            handlers.aitest(ctx)
+        else:
+            ctx = { 
+                    "session": session,
+                    "base": base,
+                    "state": state,
+                    "chat_id": msg["chat"]["id"],
+                    "user_id": msg["from"]["id"],
+                    "username": msg["from"].get("username"),
+                    "message_id": msg["message_id"],
+                    "args": text.split(),
+                }
+            if text[0] == '/':
+                handlers.idk_cmd(ctx)
+                print(f'{f"{text}".join(text.split(' ')[:0])}')
+            else:
+                handlers.idk_txt(ctx)
     else:
+    
         return None
