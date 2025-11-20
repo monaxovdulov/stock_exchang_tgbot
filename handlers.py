@@ -3,10 +3,8 @@
 from typing import Any
 import requests
 from tg_api import send_message
-from ai import aitest
-import json
-import dotenv
-import os
+from ai import get_llm_response
+
 
 
 def _ctx(ctx: dict[str, Any]) -> tuple[requests.Session, str, int, dict]:
@@ -29,7 +27,7 @@ def idk_txt(ctx: dict[str, Any]) -> None:
     session, base, chat_id, _ = _ctx(ctx)
     send_message(session, base, chat_id, "what do you mean")
 
-def aitest1(ctx: dict[str, Any], promt) -> None:
+def ai_answer(ctx: dict[str, Any], prompt: str) -> None:
     session, base, chat_id, _ = _ctx(ctx)
-    i=aitest(promt)
-    send_message(session, base, chat_id, i)
+    text = get_llm_response(prompt=prompt)
+    send_message(session, base, chat_id, text=text)

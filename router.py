@@ -42,7 +42,9 @@ def handle(
                 "args": text.split(),
             }
             handlers.on_help(ctx)
-        elif text[2] == "i":
+        elif text.split()[0] == "/ai":
+            prompt_text = " ".join(text.split()[1:])
+            
             ctx = {
                 "session": session,
                 "base": base,
@@ -54,7 +56,7 @@ def handle(
                 "args": text.split(),
             }
             
-            handlers.aitest(ctx, text)
+            handlers.ai_answer(ctx, prompt=prompt_text)
         else:
             ctx = { 
                     "session": session,

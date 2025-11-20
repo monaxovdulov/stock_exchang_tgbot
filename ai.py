@@ -1,8 +1,9 @@
-import json
-from pprint import pprint
+
 from ollama import chat
 from ollama import ChatResponse
-def aitest(prompt):
+
+
+def get_llm_response(prompt) -> str:
     response: ChatResponse = chat(model='deepseek-coder-v2:latest', messages=[
       {
         'role': 'user',
