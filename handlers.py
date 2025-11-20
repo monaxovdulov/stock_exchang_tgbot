@@ -3,12 +3,11 @@
 from typing import Any
 import requests
 from tg_api import send_message
+from ai import aitest
 import json
 import dotenv
 import os
 
-dotenv.load_dotenv()
-openrouter_token = os.getenv("BOT_TOKEN")
 
 def _ctx(ctx: dict[str, Any]) -> tuple[requests.Session, str, int, dict]:
     """Удобная распаковка часто используемых полей контекста."""
@@ -30,6 +29,7 @@ def idk_txt(ctx: dict[str, Any]) -> None:
     session, base, chat_id, _ = _ctx(ctx)
     send_message(session, base, chat_id, "what do you mean")
 
-def aitest(ctx: dict[str, Any]) -> None:
+def aitest1(ctx: dict[str, Any], promt) -> None:
     session, base, chat_id, _ = _ctx(ctx)
-    send_message(session, base, chat_id, "in test")
+    i=aitest(promt)
+    send_message(session, base, chat_id, i)

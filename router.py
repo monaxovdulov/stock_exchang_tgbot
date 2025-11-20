@@ -42,7 +42,7 @@ def handle(
                 "args": text.split(),
             }
             handlers.on_help(ctx)
-        elif text == "/ai":
+        elif text[2] == "i":
             ctx = {
                 "session": session,
                 "base": base,
@@ -53,7 +53,8 @@ def handle(
                 "message_id": msg["message_id"],
                 "args": text.split(),
             }
-            handlers.aitest(ctx)
+            
+            handlers.aitest(ctx, text)
         else:
             ctx = { 
                     "session": session,
@@ -67,7 +68,7 @@ def handle(
                 }
             if text[0] == '/':
                 handlers.idk_cmd(ctx)
-                print(f'{f"{text}".join(text.split(' ')[:0])}')
+                
             else:
                 handlers.idk_txt(ctx)
     else:
